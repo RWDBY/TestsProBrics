@@ -2,7 +2,7 @@ from playwright.sync_api import Page, expect
 import random
 import re
 
-def test_import_card(page: Page):
+def test_export_card(page: Page):
     print("\n[ТЕСТ] Создание карточки импорта")
     email = "quqisocy@gmail.com"
     password = "12345678aA!"
@@ -111,15 +111,14 @@ def test_import_card(page: Page):
     page.fill('id=MaximalDeliveryDays', str(random_day+14))
     print(f"[ОТЧЁТ] Максимальный срок поставки: {random_day+14}")
 
-    print("[ШАГ 9.2] Загружаем фотографию товара...")
-    # Укажите путь к вашей фотографии
-    photo_path = "C:/Users/Андрей/Downloads/test_photo.jpg"
-    file_input = page.locator('div.css-vdczu1.ant-upload.ant-upload-drag input[type="file"]')
-
-    for _ in range(2):
-     file_input.set_input_files(photo_path)
-
-    print(f"[ОТЧЁТ] Фотография '{photo_path}' загружена.")
+    print("[ШАГ 9.9] Загрузка фотографии...")
+    # Указываем путь к файлу (относительно корня проекта или абсолютный)
+    photo_path = "D:/test/pic.png"
+    # Находим скрытый input внутри драг-н-дроп зоны
+    upload_input = page.locator('div.css-vdczu1.ant-upload input[type="file"]')
+    # Загружаем файл
+    upload_input.set_input_files(photo_path)
+    print(f"[ОТЧЁТ] Фотография загружена: {photo_path}")
 
     print("[ШАГ 10] Карточка товара успешно заполнена.")
 

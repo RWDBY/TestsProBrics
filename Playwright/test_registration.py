@@ -10,13 +10,20 @@ def test_registration(page: Page):
     print("[ОТЧЁТ] Страница регистрации открыта.")
 
     print("[ШАГ 2] Вводим данные пользователя...")
-    random_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=random.randint(3, 9)))
-    email = f"testuser_{random_part}@gmail.com"
+    random_part = ''.join(random.choices(string.digits, k=3))
+    email = f"quqisocy+{random_part}@gmail.com"
     password = '12345678aA!'
     page.fill('id=email', email)
     page.fill('id=pass', password)
     page.fill('id=repeat', password)
     print(f"[ОТЧЁТ] Данные пользователя введены:\n  Email: {email}\n  Пароль: {password}")
+
+    print("[ШАГ 2.5] Отмечаем чекбоксы согласий...")
+    # Первый чекбокс
+    page.locator('input.ant-checkbox-input').nth(0).click()
+    # Второй чекбокс
+    page.locator('input.ant-checkbox-input').nth(1).click()
+    print("[ОТЧЁТ] Чекбоксы отмечены.")
 
     print("[ШАГ 3] Отправляем форму регистрации...")
     page.get_by_role("button", name="Зарегистрироваться").click()

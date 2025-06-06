@@ -6,6 +6,7 @@ def test_import_card(page: Page):
     print("\n[ТЕСТ] Создание карточки импорта")
     email = "quqisocy@gmail.com"
     password = "12345678aA!"
+    password = "12345678aA!"
 
     print("[ШАГ 1] Переход на страницу авторизации...")
     page.goto("https://account.pro-brics.com")
